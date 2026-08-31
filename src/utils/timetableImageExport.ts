@@ -291,6 +291,11 @@ export async function generateWeeklyPNG(
     );
   }
 
+  function courseLabel(e: FlatRecord): string {
+    const base = e.course_title || 'TBA';
+    return e.practical ? `[P] ${base}` : base;
+  }
+
   interface DayLayout {
     timeH: number;
     courseH: number;
@@ -333,7 +338,7 @@ export async function generateWeeklyPNG(
           mxT = Math.max(mxT, wrapText(ts, tw, cellFontBold).length);
           mxC = Math.max(
             mxC,
-            wrapText(e.course_title || 'TBA', tw, cellFont).length
+            wrapText(courseLabel(e), tw, cellFont).length
           );
           if (withTeacher) {
             mxTch = Math.max(
@@ -656,7 +661,7 @@ export async function generateWeeklyPNG(
         rowY,
         layout.courseH,
         1,
-        (e) => e.course_title || 'TBA',
+        (e) => courseLabel(e),
         cellFont,
         false,
         ''

@@ -336,10 +336,7 @@ export async function generateWeeklyPNG(
         for (const e of entries) {
           const ts = to12(e.start_time) + ' \u2013 ' + to12(e.end_time);
           mxT = Math.max(mxT, wrapText(ts, tw, cellFontBold).length);
-          mxC = Math.max(
-            mxC,
-            wrapText(courseLabel(e), tw, cellFont).length
-          );
+          mxC = Math.max(mxC, wrapText(courseLabel(e), tw, cellFont).length);
           if (withTeacher) {
             mxTch = Math.max(
               mxTch,
